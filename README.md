@@ -1,2 +1,2 @@
 # PRODUCT-BRAND-FEEDBACK-FORM
-PRODUCT/BRAND FEEDBACK FORM USING BOOTSTRAP, PHP AND MYSQL
+Welcome to the Feedback Form repository! This web application gathers feedback from customers or clients about your products or brand, providing a user-friendly interface for submissions. It features customizable fields, data validation, and securely stores feedback in a MySQL database. Utilizing PHP for backend scripting, Bootstrap for frontend design, and MySQL for data storage, it ensures responsive and visually appealing feedback collection.
