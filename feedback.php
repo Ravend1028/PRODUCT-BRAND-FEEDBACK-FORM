@@ -5,7 +5,6 @@ $sql = 'SELECT * FROM feedback';
 $result = mysqli_query($conn, $sql);
 $feedback = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
-
    
   <h2>Past Feedback</h2>
 
@@ -26,5 +25,5 @@ $feedback = mysqli_fetch_all($result, MYSQLI_ASSOC);
      </div>
    </div>
   <?php endforeach; ?>
-  
+
 <?php include 'inc/footer.php'; ?>
