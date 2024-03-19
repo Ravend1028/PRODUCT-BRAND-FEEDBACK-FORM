@@ -1,18 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<?php include 'inc/header.php'; ?>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feedback Form</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  
+<?php
+// Set vars to empty values
+$name = $email = $body = '';
+$nameErr = $emailErr = $bodyErr = '';
 
-</head>
-<body>
+// Form submit
+if (isset($_POST['submit'])) {
+  // Validate name
+  if (empty($_POST['name'])) {
+    $nameErr = 'Name is required';
+  } else {
+    // $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $name = filter_input(
+      INPUT_POST,
+      'name',
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
+  }
+
+  // Validate email
+  if (empty($_POST['email'])) {
+    $emailErr = 'Email is required';
+  } else {
+    // $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+  }
+
+  // Validate body
+  if (empty($_POST['body'])) {
+    $bodyErr = 'Body is required';
+  } else {
+    // $body = filter_var($_POST['body'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $body = filter_input(
+      INPUT_POST,
+      'body',
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
+  }
+
+  if (empty($nameErr) && empty($emailErr) && empty($bodyErr)) {
+    // add to database
+    $sql = "INSERT INTO feedback (name, email, body) VALUES ('$name', '$email', '$body')";
+    if (mysqli_query($conn, $sql)) {
+      // success
+      header('Location: feedback.php');
+    } else {
+      // error
+      echo 'Error: ' . mysqli_error($conn);
+    }
+  }
+}
+?>
+
+<?php include 'inc/footer.php'; ?>
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
